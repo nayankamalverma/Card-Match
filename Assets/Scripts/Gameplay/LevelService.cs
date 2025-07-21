@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,9 @@ namespace CardMatch.Script.Gameplay
         [SerializeField] private Card cardPrefab;
         [SerializeField] private Transform gridTransform;
 
-        [Header("row or column one must be even for better ux")] 
-        [SerializeField][Range(2,8)] private int column = 4;
-        [SerializeField][Range(2,4)] private int row = 3;
+        //[Header("row or column one must be even for better ux")] 
+        //[SerializeField][Range(2,8)] private int column = 4;
+        //[SerializeField][Range(2,4)] private int row = 3;
         [SerializeField] private GridLayoutGroup gridLayoutGroup;
         [Space]
         [SerializeField] private float matchingWaiTime = 0.03f;
@@ -22,15 +23,22 @@ namespace CardMatch.Script.Gameplay
         private List<CardSO> cardDataPairsList = new List<CardSO>();
         private Card firstSelection;
         private Card SecondSelection;
-
-        private void Start()
+        private EventService eventService;
+        public void SetReferences(EventService eventService)
         {
-            GenerateCardGrid();
+            this.eventService = eventService;
+            AddEventListeners();
         }
 
-        private void GenerateCardGrid()
+        private void AddEventListeners()
         {
-            PrepareCardData();
+            
+        }
+
+
+        private void GenerateCardGrid(int row, int col)
+        {
+            PrepareCardData(row,col);
             CreateCards();
         }
 
@@ -43,10 +51,10 @@ namespace CardMatch.Script.Gameplay
             }
         }
 
-        private void PrepareCardData()
+        private void PrepareCardData(int row, int col)
         {
-            gridLayoutGroup.constraintCount = column;
-            gridLength = (column * row) / 2 ;
+            gridLayoutGroup.constraintCount = col;
+            gridLength = (col * row) / 2 ;
             cardDataPairsList.Clear();
             for (int i = 0; i < gridLength; i++)
             {
@@ -91,7 +99,7 @@ namespace CardMatch.Script.Gameplay
             yield return new WaitForSeconds(matchingWaiTime);
             if (a.cardData.CardType == b.cardData.CardType)
             {
-
+                //on match found logic
             }
             else
             {

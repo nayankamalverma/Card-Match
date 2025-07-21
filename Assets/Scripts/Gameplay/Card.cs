@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using PrimeTween;
 
 namespace CardMatch.Script.Gameplay
 {
@@ -25,13 +26,16 @@ namespace CardMatch.Script.Gameplay
         
         public void Show()
         {
-            cardImage.sprite = cardData.cardIcon_back;
+            Tween.Rotation(transform, new Vector3(0f, 180f, 0f), 0.2f);
+            Tween.Delay(0.1f, () => cardImage.sprite = cardData.cardIcon_back);
+            
             isSelected = true;
         }
 
         public void Hide()
         {
-            cardImage.sprite = cardData.cardFrame_front;
+            Tween.Rotation(transform, new Vector3(0f, 0f, 0f), 0.2f);
+            Tween.Delay(0.1f, () => cardImage.sprite = cardData.cardFrame_front);
             isSelected = false;
         }
     }

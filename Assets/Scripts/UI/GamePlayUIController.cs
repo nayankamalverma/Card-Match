@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Assets.Scripts.Events;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.UI
@@ -9,6 +10,11 @@ namespace Assets.Scripts.UI
         [SerializeField] private TextMeshProUGUI matchesText;
         [SerializeField] private TextMeshProUGUI turnText;
 
+        private EventService eventService;
 
+        public void SetReference(EventService eventService)
+        {
+            this.eventService = eventService;
+        }
     }
 }

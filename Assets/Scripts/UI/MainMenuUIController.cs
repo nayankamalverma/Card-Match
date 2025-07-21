@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Events;
 using UnityEngine;
 
 public class MainMenuUIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private EventService eventService;
+
+    public void SetReference(EventService eventService)
     {
-        
+        this.eventService = eventService;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
