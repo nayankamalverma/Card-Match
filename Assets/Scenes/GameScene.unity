@@ -131,6 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64911426}
+  - component: {fileID: 64911427}
   m_Layer: 5
   m_Name: GamePlayUI
   m_TagString: Untagged
@@ -161,6 +162,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &64911427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64911425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ec8b31226fb2246bbc59ef794b6e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 2128301576}
+  matchesText: {fileID: 764985596}
+  turnText: {fileID: 269781335}
 --- !u!1 &172625329
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +190,7 @@ GameObject:
   - component: {fileID: 172625331}
   - component: {fileID: 172625330}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UIService
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +495,7 @@ GameObject:
   - component: {fileID: 364730572}
   - component: {fileID: 364730574}
   m_Layer: 5
-  m_Name: Card Grid
+  m_Name: LevelSevice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,7 +569,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 364730570}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b79ba1260ce705419847be66a76723c, type: 3}
+  m_Script: {fileID: 11500000, guid: cf4d2db6f70dca9449b6a27c6a004244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardData:
@@ -579,11 +595,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7db1a124045b4d944b638aaff3e7baf9, type: 2}
   cardPrefab: {fileID: 5146253739387158762, guid: 453e8b746d4a588479a5d1277d5d9eeb, type: 3}
   gridTransform: {fileID: 1059566518}
-  column: 6
-  row: 5
+  column: 8
+  row: 4
   gridLayoutGroup: {fileID: 1059566519}
-  gridLength: 0
-  cardDataPairsList: []
+  matchingWaiTime: 0.03
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,8 +828,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1059566518}
   - component: {fileID: 1059566519}
+  - component: {fileID: 1059566520}
   m_Layer: 5
-  m_Name: Card layout
+  m_Name: Card Grid layout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,6 +880,26 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
   m_ConstraintCount: 6
+--- !u!114 &1059566520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059566517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 100
+  m_MinHeight: 150
+  m_PreferredWidth: 150
+  m_PreferredHeight: 250
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
 --- !u!1 &1914003893
 GameObject:
   m_ObjectHideFlags: 0

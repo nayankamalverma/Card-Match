@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,15 +11,24 @@ namespace CardMatch.Script.Gameplay
         [SerializeField] private Card cardPrefab;
         [SerializeField] private Transform gridTransform;
 
-        [Header("Must be even")]
-        [SerializeField] private int column = 4;
-        [SerializeField] private int row = 3;
+        [Header("row or column one must be even for better ux")] 
+        [SerializeField][Range(2,8)] private int column = 4;
+        [SerializeField][Range(2,4)] private int row = 3;
         [SerializeField] private GridLayoutGroup gridLayoutGroup;
+        [Space]
+        [SerializeField] private float matchingWaiTime = 0.03f;
 
         private int gridLength;
         private List<CardSO> cardDataPairsList = new List<CardSO>();
+        private Card firstSelection;
+        private Card SecondSelection;
 
         private void Start()
+        {
+            GenerateCardGrid();
+        }
+
+        private void GenerateCardGrid()
         {
             PrepareCardData();
             CreateCards();
@@ -61,6 +71,32 @@ namespace CardMatch.Script.Gameplay
             if (!card.isSelected)
             {
                 card.Show();
+                if (firstSelection==null)
+                {
+                    firstSelection = card;
+                    return;
+                }
+                if (SecondSelection == null)
+                {
+                    SecondSelection = card;
+                    StartCoroutine(Matching(firstSelection, SecondSelection));
+                    firstSelection = null;
+                    SecondSelection = null;
+                }
+            }
+        }
+
+        private IEnumerator Matching(Card a, Card b)
+        {
+            yield return new WaitForSeconds(matchingWaiTime);
+            if (a.cardData.CardType == b.cardData.CardType)
+            {
+
+            }
+            else
+            {
+                a.Hide();
+                b.Hide();
             }
         }
     }

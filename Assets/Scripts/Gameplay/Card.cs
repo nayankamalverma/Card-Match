@@ -7,8 +7,8 @@ namespace CardMatch.Script.Gameplay
     {
         [SerializeField] private Image cardImage;
 
-        private CardSO cardData;
         private LevelService levelService;
+        public CardSO cardData { get; private set; }
         public bool isSelected { get; private set; }
 
         public void SetReference(CardSO cardData, LevelService levelService)
