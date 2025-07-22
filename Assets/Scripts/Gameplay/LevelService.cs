@@ -11,16 +11,13 @@ namespace CardMatch.Script.Gameplay
         [SerializeField] private CardSO[] cardData;
         [SerializeField] private Card cardPrefab;
         [SerializeField] private Transform gridTransform;
-
-        //[Header("row or column one must be even for better ux")] 
-        //[SerializeField][Range(2,8)] private int column = 4;
-        //[SerializeField][Range(2,4)] private int row = 3;
         [SerializeField] private GridLayoutGroup gridLayoutGroup;
         [Space]
         [SerializeField] private float matchingWaiTime = 0.03f;
 
         private int gridLength;
         private List<CardSO> cardDataPairsList = new List<CardSO>();
+        public List<Card> cards = new List<Card>();
         private Card firstSelection;
         private Card SecondSelection;
         private EventService eventService;
@@ -32,22 +29,32 @@ namespace CardMatch.Script.Gameplay
 
         private void AddEventListeners()
         {
-            
+           eventService.OnGameStart.AddListener(GenerateCardGrid);
         }
 
-
-        private void GenerateCardGrid(int row, int col)
+        private void GenerateCardGrid(int row, int col )
         {
+            ClearCards();
             PrepareCardData(row,col);
             CreateCards();
         }
 
-        private void CreateCards()
+        private void ClearCards()
         {
+            foreach (Card card in cards)
+            {
+                Destroy(card.gameObject);
+            }
+            cards.Clear();
+        }
+
+        private void CreateCards()
+        {   
             foreach (var cardData in cardDataPairsList)
             {
                 Card card = Instantiate(cardPrefab, gridTransform);
                 card.SetReference(cardData, this);
+                cards.Add(card);
             }
         }
 
