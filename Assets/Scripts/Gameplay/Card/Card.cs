@@ -26,6 +26,7 @@ namespace CardMatch.Script.Gameplay
         
         public void Show()
         {
+            SoundService.Instance.Play(SoundType.Card_Flip);
             Tween.Rotation(transform, new Vector3(0f, 180f, 0f), 0.2f);
             Tween.Delay(0.1f, () => cardImage.sprite = cardData.cardIcon_back);
             

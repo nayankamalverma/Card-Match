@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Events;
+﻿using CardMatch.Scripts.Utilities.Events;
 using TMPro;
 using UnityEngine;
 
@@ -59,6 +59,7 @@ namespace Assets.Scripts.UI
 
         private void GameOver()
         {
+            SoundService.Instance.Play(SoundType.Game_Complete);
             isTimerOn = false;
             eventService.OnGameOver.Invoke(turns, time);
         }

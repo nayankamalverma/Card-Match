@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Events;
+﻿using CardMatch.Scripts.Utilities.Events;
 using TMPro;
 using UnityEngine;
 
