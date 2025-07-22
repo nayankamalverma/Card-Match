@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Events;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts.UI
@@ -44,6 +45,13 @@ namespace Assets.Scripts.UI
             mainMenuUiController.gameObject.SetActive(false);
             gamePlayUIController.gameObject.SetActive(false);
             gameOverUIController.gameObject.SetActive(true);
+        }
+
+        private void OnDestroy()
+        {
+            eventService.OnMainMenuButtonClick.RemoveListener(OnMainMenuButtonClick);
+            eventService.OnGameStart.RemoveListener(GameStart);
+            eventService.OnGameOver.RemoveListener(OnGameOver);
         }
     }
 }

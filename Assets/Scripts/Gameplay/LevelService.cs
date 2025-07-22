@@ -17,7 +17,7 @@ namespace CardMatch.Script.Gameplay
 
         private int gridLength;
         private List<CardSO> cardDataPairsList = new List<CardSO>();
-        public List<Card> cards = new List<Card>();
+        private List<Card> cards = new List<Card>();
         private Card firstSelection;
         private Card SecondSelection;
         private EventService eventService;
@@ -76,7 +76,6 @@ namespace CardMatch.Script.Gameplay
             for (int i = cardDataPairsList.Count - 1; i > 0; i--)
             {
                 int randomIndex = Random.Range(0, i + 1);
-
                 (cardDataPairsList[i], cardDataPairsList[randomIndex]) = (cardDataPairsList[randomIndex], cardDataPairsList[i]);
             }
         }
@@ -97,6 +96,7 @@ namespace CardMatch.Script.Gameplay
                     StartCoroutine(Matching(firstSelection, SecondSelection));
                     firstSelection = null;
                     SecondSelection = null;
+                    eventService.IncreaseTurn.Invoke();
                 }
             }
         }
@@ -106,13 +106,18 @@ namespace CardMatch.Script.Gameplay
             yield return new WaitForSeconds(matchingWaiTime);
             if (a.cardData.CardType == b.cardData.CardType)
             {
-                //on match found logic
+                eventService.OnMatchFound.Invoke();
             }
             else
             {
                 a.Hide();
                 b.Hide();
             }
+        }
+
+        private void OnDestroy()
+        {
+            eventService.OnGameStart.RemoveListener(GenerateCardGrid);
         }
     }
 }
