@@ -108,11 +108,13 @@ namespace CardMatch.Script.Gameplay
             if (a.cardData.CardType == b.cardData.CardType)
             {
                 eventService.OnMatchFound.Invoke();
+                SoundService.Instance.Play(SoundType.Card_Match);
             }
             else
             {
                 a.Hide();
                 b.Hide();
+                SoundService.Instance.Play(SoundType.Card_Mismatch);
             }
         }
 

@@ -59,6 +59,7 @@ namespace Assets.Scripts.UI
 
         private void GameOver()
         {
+            SoundService.Instance.Play(SoundType.Game_Complete);
             isTimerOn = false;
             eventService.OnGameOver.Invoke(turns, time);
         }
