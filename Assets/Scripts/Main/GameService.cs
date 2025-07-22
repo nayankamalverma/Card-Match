@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Events;
-using Assets.Scripts.UI;
+﻿using Assets.Scripts.UI;
 using CardMatch.Script.Gameplay;
+using CardMatch.Scripts.Utilities.Events;
 using UnityEngine;
 
 namespace Assets.Scripts.Main

@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Events;
-using Unity.VisualScripting;
+﻿using CardMatch.Scripts.Utilities.Events;
 using UnityEngine;
 
 namespace Assets.Scripts.UI

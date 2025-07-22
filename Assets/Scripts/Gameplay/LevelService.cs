@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.Events;
+using CardMatch.Scripts.Utilities.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,21 +9,25 @@ namespace CardMatch.Script.Gameplay
     public class LevelService : MonoBehaviour
     {
         [SerializeField] private CardSO[] cardData;
+        [Space]
         [SerializeField] private Card cardPrefab;
         [SerializeField] private Transform gridTransform;
         [SerializeField] private GridLayoutGroup gridLayoutGroup;
         [Space]
-        [SerializeField] private float matchingWaiTime = 0.03f;
+        [SerializeField] private float matchingWaiTime = 0.33f;
 
         private int gridLength;
         private List<CardSO> cardDataPairsList = new List<CardSO>();
         private List<Card> cards = new List<Card>();
         private Card firstSelection;
         private Card SecondSelection;
+        
+        private CardObjectPool cardObjectPool;
         private EventService eventService;
         public void SetReferences(EventService eventService)
         {
             this.eventService = eventService;
+            cardObjectPool = new CardObjectPool(cardPrefab, gridTransform);
             AddEventListeners();
         }
 
@@ -36,23 +40,20 @@ namespace CardMatch.Script.Gameplay
         {
             ClearCards();
             PrepareCardData(row,col);
-            CreateCards();
+            SetCardsData();
         }
 
         private void ClearCards()
         {
-            foreach (Card card in cards)
-            {
-                Destroy(card.gameObject);
-            }
+            cardObjectPool.ReturnAllCards();
             cards.Clear();
         }
 
-        private void CreateCards()
+        private void SetCardsData()
         {   
             foreach (var cardData in cardDataPairsList)
             {
-                Card card = Instantiate(cardPrefab, gridTransform);
+                Card card = cardObjectPool.GetCard();
                 card.SetReference(cardData, this);
                 cards.Add(card);
             }

@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.Events
+﻿namespace CardMatch.Scripts.Utilities.Events
 {
     public class EventService
     {
